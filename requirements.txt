@@ -5,7 +5,7 @@ pathlib
 numpy
 Pillow
 opencv-python
-torch torchvision torchaudio
+pytorch torchvision torchaudio
 tqdm
 simplejson
 -qr https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
