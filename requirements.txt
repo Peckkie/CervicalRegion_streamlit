@@ -8,4 +8,4 @@ opencv-python
 torch
 tqdm
 simplejson
--qr https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
+https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
