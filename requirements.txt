@@ -8,6 +8,7 @@ torch
 tqdm
 simplejson
 tensorflow
+--upgrade pip
 opencv-python opencv-python-headless
 # -r https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
 
