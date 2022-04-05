@@ -7,6 +7,7 @@ opencv-python
 torch
 tqdm
 simplejson
+tensorflow
 # -r https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
 
 # pip install -r requirements.txt
