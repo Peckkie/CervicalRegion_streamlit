@@ -1,7 +1,6 @@
 pandas
 streamlit
 streamlit-folium
-pathlib
 numpy
 Pillow
 opencv-python
