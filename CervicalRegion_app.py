@@ -19,7 +19,7 @@ import tqdm
 def load_model():
     path_model = '/app/CervicalRegion_streamlit/model/ModelYOLOv5m-R1-CervicalRegion-last.pt'
     #model = torch.hub.load('ultralytics/yolov5', 'custom', path=path_model, device='cpu')
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path=path_model)
+    model = torch.hub.load('ultralytics/yolov5', 'custom', path=path_model, force_reload=True)
     return model
 with st.spinner('Model is being loaded..'):
     model=load_model()
