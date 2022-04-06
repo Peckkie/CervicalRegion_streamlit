@@ -79,7 +79,7 @@ def plot_img(df):
             st.success(string)
             image_pre = cv2.rectangle(img_c, (xmin_pre ,ymin_pre), (xmax_pre, ymax_pre), (32, 32, 216), 3) #32, 32, 216 | 57, 0, 199
             image_pre_ = cv2.putText(image_pre, label, (xmin_pre, ymin_pre-10), 3, 0.8, [32, 32, 216], thickness=2, lineType=1)
-        path_img = "/app/CervicalRegion_streamlit/image/"+file.name
+        path_img = "image/"+file.name
         cv2.imwrite(path_img, image_pre_)
     
     
@@ -95,9 +95,9 @@ if file is None:
 else:
     image = Image.open(file)
     #st.image(image, use_column_width=True)
-    image.save("'/app/CervicalRegion_streamlit/image/"+file.name)
+    image.save("image/"+file.name)
     
-    path_img = '/app/CervicalRegion_streamlit/image/'+file.name
+    path_img = 'image/'+file.name
     #st.write(file.type +'/'+file.name) #file.name
     df = predict_box(path_img)
     plot_img(df)
