@@ -18,10 +18,7 @@ import tqdm
 @st.cache(allow_output_mutation=True)
 def load_model():
     path_model = '/app/CervicalRegion_streamlit/model/ModelYOLOv5m-R1-CervicalRegion-last.pt'
-    #model = torch.hub.load('ultralytics/yolov5', 'custom', path=path_model, device='cpu', force_reload=True)
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='model/ModelYOLOv5m-R1-CervicalRegion-last.pt', force_reload=True) # or yolov5m, yolov5l, yolov5x, custom
-    #model = torch.hub.load('ultralytics/yolov5', path='/app/CervicalRegion_streamlit/model/ModelYOLOv5m-R1-CervicalRegion-last.pt', force_reload=True)
-    #model = torch.hub.load('ultralytics/yolov5', 'custom', path=path_model, force_reload=True).autoshape()
     return model
 with st.spinner('Model is being loaded..'):
     model=load_model()
@@ -72,17 +69,29 @@ def plot_img(df):
             #label = df['name'][j]+':conf '+str((df['confidence'][j]* 1e4).astype(int) / 1e4)
             #label = str((df['confidence'][j]* 1e3).astype(int) / 1e3)
             label = 'B'+str(j+1)+' : '+str((df['confidence'][j]* 1e4).astype(int) / 1e4)
-            label_ = 'B'+str(j+1)
-            conf_box = (df['confidence'][j]* 1e4).astype(int) / 1e4
+            #label_ = 'B'+str(j+1)
+            #conf_box = (df['confidence'][j]* 1e4).astype(int) / 1e4
             #st.write(f'{label}: Postate Cancer, Confident {conf_box}')
-            string = f'{label_}: Cervical fracture, Confident {conf_box}'
-            st.success(string)
+            #string = f'{label_}: Cervical fracture, Confident {conf_box}'
+            #st.success(string)
             image_pre = cv2.rectangle(img_c, (xmin_pre ,ymin_pre), (xmax_pre, ymax_pre), (32, 32, 216), 3) #32, 32, 216 | 57, 0, 199
             image_pre_ = cv2.putText(image_pre, label, (xmin_pre, ymin_pre-10), 3, 0.8, [32, 32, 216], thickness=2, lineType=1)
         path_img = "image/"+file.name
         cv2.imwrite(path_img, image_pre_)
     
-    
+def plot_img_str(df):
+    img_path = list(set(df['Path']))
+    img_c = cv2.imread(img_path[0])
+    if df['confidence'][0] == 0:
+        image_pre_ = img_c
+        string = "[Non't Detected]"
+        st.success(string)
+    else:
+        for j in range(len(df)):
+            label_ = 'B'+str(j+1)
+            conf_box = (df['confidence'][j]* 1e4).astype(int) / 1e4
+            string = f'{label_}: Cervical fracture, Confident {conf_box}'
+            st.success(string)
 
 file = st.file_uploader("Please upload an image file", type=["jpg", "png", ".jpeg"])
 import cv2
@@ -104,3 +113,4 @@ else:
     df = predict_box(path_img, thres)
     plot_img(df)
     st.image(path_img, use_column_width=True)
+    plot_img_str(df)
