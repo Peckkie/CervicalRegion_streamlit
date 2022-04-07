@@ -84,7 +84,7 @@ def plot_img(df):
     
     
 
-file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
+file = st.file_uploader("Please upload an image file", type=["jpg", "png", ".jpeg"])
 import cv2
 from PIL import Image, ImageOps
 import numpy as np
