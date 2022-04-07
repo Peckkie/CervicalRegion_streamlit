@@ -61,7 +61,7 @@ def plot_img(df):
     #label = str(df['confidence'][0])
     if df['confidence'][0] == 0:
         image_pre_ = img_c
-        string = "[Non't Detected]"
+        string = "[Not Detected]"
         st.success(string)
     else:
         for j in range(len(df)):
