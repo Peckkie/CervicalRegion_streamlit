@@ -58,8 +58,8 @@ def plot_img(df):
     #label = str(df['confidence'][0])
     if df['confidence'][0] == 0:
         image_pre_ = img_c
-        string = "[Not Detected]"
-        st.success(string)
+        #string = "[Not Detected]"
+        #st.success(string)
     else:
         for j in range(len(df)):
             xmin_pre = int(df['xmin'][j])
