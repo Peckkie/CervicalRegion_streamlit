@@ -27,15 +27,15 @@ with st.spinner('Model is being loaded..'):
     model=load_model()
 
 st.write("""
-         # Cervical fracture Detection
+         # 🔗 Cervical fracture Detection
          """
          )
 
 
-def predict_box(path_img): ## **-- path/to/image/.jpg 
+def predict_box(path_img, thres): ## **-- path/to/image/.jpg 
     ##เตรียม Data เข้าสู้ Network
     image_cv = cv2.imread(path_img)[..., ::-1] 
-    model.conf = 0.10 # NMS confidence threshold
+    model.conf = thres # NMS confidence threshold
     model.iou = 0.50 # NMS IoU threshold
     model.classes = None   # (optional list) filter by class, i.e. = [0, 15, 16] for persons, cats and dogs
     model.multi_label = False  # NMS multiple labels per box
@@ -90,6 +90,8 @@ from PIL import Image, ImageOps
 import numpy as np
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
+thres = st.slider("Confidence threshold", 0.00, 1.00, 0.70)
+
 if file is None:
     st.text("Please upload an image file")
 else:
@@ -99,6 +101,6 @@ else:
     
     path_img = 'image/'+file.name
     #st.write(file.type +'/'+file.name) #file.name
-    df = predict_box(path_img)
+    df = predict_box(path_img, thres)
     plot_img(df)
     st.image(path_img, use_column_width=True)
